@@ -18,9 +18,10 @@ app.post('/create',(req,res)=>{
     const budget = req.body.budget
     const dues = req.body.dues
     const mark = req.body.mark
+    const photo = req.body.photo
 
-    db.query('insert into films values (?,?,?,?,?)',
-        [id,title,budget,dues,mark],
+    db.query('insert into films values (?,?,?,?,?,?)',
+        [id,title,budget,dues,mark,photo],
         (err,result) =>{
             if (err){
                 console.log(err)
@@ -50,6 +51,8 @@ app.get('/films',(req,res)=>{
 
 
 })
+
+
 
 
 

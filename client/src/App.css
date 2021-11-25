@@ -208,9 +208,20 @@ footer {
 
 }
 
+a.active{
+
+}
 
 
 
+.big_film_photo img {
+  width: 200px;
+  height: 300px;
+  padding-left: 20px;
 
-
-
+}
+.film_page{
+  display: grid;
+  grid-template-columns: 3fr 9fr ;
+  text-align: justify;
+}

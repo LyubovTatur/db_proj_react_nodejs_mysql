@@ -6,6 +6,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Home from './pages/main'
 import {BrowserRouter as Router, NavLink, Route, Routes} from "react-router-dom";
+import Film from "./pages/film";
 
 function App() {
     const [id, setId] = useState('')
@@ -13,6 +14,7 @@ function App() {
     const [budget, setBudget] = useState('')
     const [dues, setDues] = useState('')
     const [mark, setMark] = useState('')
+    const [photo, setPhoto] = useState('')
 
     const [films, setFilms] = useState([])
 
@@ -20,9 +22,19 @@ function App() {
         axios.get('http://localhost:3001/films',{
 
         }).then((response)=>{
-            setFilms(response.data)
+                setFilms(response.data)
+
+            // setFilms(response.data.map(film => {
+            //     const photo = require(film.photo)
+            //     film.photo=photo
+            //
+            // } ))
+            // setFilms(films.map(film =>{film.photo = require(film.photo)}))
         })
+        console.log(('фильмы получены'));
     }
+
+
 
     const AddFilm = () =>{
         axios.post('http://localhost:3001/create',{
@@ -30,7 +42,8 @@ function App() {
             title:title,
             budget:budget,
             dues:dues,
-            mark:mark
+            mark:mark,
+            photo:photo
 
         }).then(()=>{
             setFilms([...films,{
@@ -38,7 +51,8 @@ function App() {
                 title:title,
                 budget:budget,
                 dues:dues,
-                mark:mark
+                mark:mark,
+                photo:photo
 
             }])
             setId('')
@@ -46,11 +60,15 @@ function App() {
             setBudget('')
             setDues('')
             setMark('')
+            setPhoto('')
             console.log('success')
         })
     }
 
-
+    const OpenFilmPage = () =>
+    {
+        console.log('ochkozavr')
+    }
 
 
     return (
@@ -102,16 +120,26 @@ function App() {
     //     </table>
     //
     // </div>
-      <div className="App">
-          {/*<Header/>*/}
-
+      <div className="App" >
+          <Header/>
+          <div className="photo_film">
+          </div>
           {/*<Home/>*/}
+
           <Router>
-          <NavLink to="/zxc">ww</NavLink>
-                <Routes>
-                     <Route  path="/zxc" element={<Home/>} />
+          <NavLink to="/films" onClick={getFilms}>films</NavLink><br/>
+          <NavLink to="/film" onClick={getFilms}>film</NavLink><br/>
+          <NavLink exact to="/" onClick={getFilms}>na slesh</NavLink><br/>
+
+
+              <Routes>
+                     <Route  path="/films" element={<Home OpenFilmPage={OpenFilmPage} films={films}/>} />
+                     <Route  path="/film" element={<Film films={films}/>} />
+                     <Route  path="/" element={''} />
+                     {/*   <Route path='/zxc'></Route>*/}
                 </Routes>
           </Router>
+              <Footer/>
 
 
       </div>
