@@ -225,3 +225,7 @@ a.active{
   grid-template-columns: 3fr 9fr ;
   text-align: justify;
 }
+.film_page_title{
+  text-align: left;
+  padding-left: 20px;
+}
