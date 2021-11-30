@@ -214,11 +214,16 @@ a.active{
 
 
 
-.big_film_photo img {
+.big_film_photo, img {
   width: 200px;
   height: 300px;
   padding-left: 20px;
 
+}
+.actor_big_pic img {
+  width: 200px;
+  height: 300px;
+  padding-left: 20px;
 }
 .film_page{
   display: grid;
@@ -228,4 +233,27 @@ a.active{
 .film_page_title{
   text-align: left;
   padding-left: 20px;
+}
+.actors{
+  display: flex;
+}
+
+.actor_photo img{
+  width: 140px;
+  width: 100px;
+}
+.actor_fio{
+  font-size: 16px;
+}
+.actor_item{
+  margin: 10px;
+}
+
+.actor_info{
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+}
+.comment{
+display: block;
+  width: 200px;
 }

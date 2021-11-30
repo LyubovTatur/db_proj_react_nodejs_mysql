@@ -52,7 +52,54 @@ app.get('/films',(req,res)=>{
 
 })
 
+app.get('/actor_film',(req,res)=>{
 
+    db.query('select * from actor_film ',
+        (err,result) =>{
+            if (err){
+                console.log(err)
+            }
+            else{
+                res.send(result)
+            }
+        })
+
+
+
+})
+
+
+app.get('/actors',(req,res)=>{
+
+    db.query('select * from actors ',
+        (err,result) =>{
+            if (err){
+                console.log(err)
+            }
+            else{
+                res.send(result)
+            }
+        })
+
+
+
+})
+
+app.get('/comments',(req,res)=>{
+
+    db.query('select * from comments ',
+        (err,result) =>{
+            if (err){
+                console.log(err)
+            }
+            else{
+                res.send(result)
+            }
+        })
+
+
+
+})
 
 
 

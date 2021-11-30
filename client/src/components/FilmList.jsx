@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Film from "./Film";
+import axios from "axios";
+
+
 
 
 const FilmList = ({films, OpenFilmPage}) => {
 
-
-    return (
-        <div className="film_list">
+  return (
+        <div className="film_list"   >
             {
                 films.map((film) => {
                     return(
-                         <Film  OpenFilmPage={OpenFilmPage} film={film} key={film.id}/>
-                        // <img src={film.photo} alt="11"/>
-                        // <img src={require(film.photo).default} alt="11"/>
+                         <Film   OpenFilmPage={OpenFilmPage} film={film} key={film.id}/>
+
                     )
                     }
                 )
