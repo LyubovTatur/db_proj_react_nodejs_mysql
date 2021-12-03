@@ -12,22 +12,21 @@ const db = mysql.createConnection({
     database:'db_films'
 })
 
-app.post('/create',(req,res)=>{
-    const id = req.body.id
-    const title = req.body.title
-    const budget = req.body.budget
-    const dues = req.body.dues
-    const mark = req.body.mark
-    const photo = req.body.photo
+app.post('/addComment',(req,res)=>{
 
-    db.query('insert into films values (?,?,?,?,?,?)',
-        [id,title,budget,dues,mark,photo],
+    const mark = req.body.mark
+    const id_film = req.body.id_film
+    const commentator = req.body.commentator
+    const comment_text = req.body.comment_text
+
+    db.query('insert into comments (commentator,id_film,comment_text,mark) values (?,?,?,?)',
+        [commentator,id_film,comment_text,mark],
         (err,result) =>{
             if (err){
                 console.log(err)
             }
             else{
-                res.send("values inserted")
+                res.send("values inserted into comments")
             }
         })
 

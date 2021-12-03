@@ -43,7 +43,35 @@ const Film = (props) => {
             return name_of_person
     }
 
+    const PostComment = () => {
+        axios.post('http://localhost:3001/addComment', {
+            commentator: commentator,
+            comment_text: comment_text,
+            mark:mark,
+            id_film:props.film.id
+
+        }).then(() => {
+            setComments([...comments, {
+                id: Date.now(),
+                commentator: commentator,
+                comment_text: comment_text,
+                mark:mark,
+                id_film:props.film.id
+
+            }])
+            setCommentator('')
+            setMark('10')
+            setComment_text('')
+            console.log('success')
+        })
+
+    }
+
     const [comments, setComments] = useState([])
+
+    const [commentator, setCommentator] = useState('')
+    const [comment_text, setComment_text] = useState('')
+    const [mark, setMark] = useState('10')
 
     const getComments = () => {
         axios.get('http://localhost:3001/comments', {}).then((response) => {
@@ -54,7 +82,7 @@ const Film = (props) => {
 
     return (
         <div onLoad={() => getComments()}>
-            <h1 className='film_page_title' >{props.film.title}</h1>
+            <h1 className='film_page_title'>{props.film.title}</h1>
             <div className='film_page'>
                 <div className="big_film_photo">
                     <img src={props.film.photo} alt="what"/>
@@ -73,21 +101,26 @@ const Film = (props) => {
             </div>
             <ActorsInFilm OpenActorPage={props.OpenActorPage} actors={actorFilter()}/>
 
-            <form>
-                <input type="email" className='comment'/>
-                <textarea name="" id="" value='' cols="8" rows="10" className='comment'>
+            <form className="comment_form">
+                <input type="email" value={commentator} onChange={(e) => setCommentator(e.target.value)}
+                       className='comment'/>
+                <input type="range" min="1" max="10" onChange={(e) => setMark(e.target.value)} value={parseInt(mark)}
+                       className='comment'/>
+                <textarea value={comment_text} onChange={(e) => setComment_text(e.target.value)} cols="8" rows="10" className='comment'>
 
                 </textarea>
-                <input type="range"   min="1" max="10" className='comment'/>
+                <input type="button" className='comment' onClick={PostComment} value='Оставить комментарий'/>
             </form>
 
-            {comments.map((comment)=>{
-                return(
+            {comments.map((comment) => {
+                return (
                     <div className='comment'>
                         <div className='comment commentator'>
-                            {comment.commentator}
+                            {comment.commentator} {comment.mark} ★
                         </div>
-                        <div className=''>
+                        <div className='comment comment_text'>
+                            {comment.comment_text}
+                        </div>
                     </div>
                 )
             })}

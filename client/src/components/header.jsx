@@ -2,7 +2,7 @@ import React from 'react';
 import glassesPic from '../images/3d_glasses.png'
 import searchLogo from '../images/search_logo.png'
 import userLogo from '../images/user.png'
-import {Route, Routes} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Home from '../pages/main.js'
 
 
@@ -20,10 +20,13 @@ const Header = () => {
                 Фильмосайтик
             </div>
 
-            <div className="search_input">
-                <input type="search" id="header_search"/>
-                <img src={searchLogo} alt="поиск" id="search_logo" />
-            </div>
+            <NavLink to="/films">e
+                <div className="search_input">
+                    <input type="search" id="header_search"/>
+                    <img src={searchLogo} alt="поиск" id="search_logo"/>
+
+                </div>
+            </NavLink>
 
             <div className="user_profile" href="login.html">
 
